@@ -45,12 +45,6 @@ $(document).ready(function () {
         maxSelections: 1
     });
 
-    /*
-    $("#btnSelectBoard").on("click", function (event) {
-        $('#divLabel').html((this).val("#myBoardsList"));        
-    });
-    */
-
 
     function cmdPostMe(actionType, boardID, patternID) {
         var apiURL = 'api?=actiontype=' + actionType + '&token=' + boardID + '&pattern=' + patternID;
@@ -77,15 +71,6 @@ $(document).ready(function () {
         $('#divLabel').html(" Ride mode ");
     });
 
-
-
-
-    // $(".modal_ces_video").modalVideo({ channel: 'youtube', start: 200, autoplay: 1 });
-    // $(".modal_schaeffler_video").modalVideo({ channel: 'youtube', start: 0, autoplay: 1 });
-
-    // $('#divLikes').html( "3333" );
-
-// AIzaSyChADAVzUyaQX2KOFc4ZeUXplKykuIvlfk
 
     $(window).scroll(function () {
         var height = $(window).scrollTop();
@@ -179,34 +164,3 @@ $(document).ready(function () {
 
 
 });
-
-/*
-
-$("#btnLike").on("click", function (event) {
-    var _actualVal = $('#divLikes').text();
-    var _likeItems = parseInt(_actualVal) + 1;
-    var _apiPostResult = '';
-    $.ajax({
-        type: "POST",
-        url: "api/like",
-        // data: "{'code':'"+ selectedValue +"'}", //"{'code':'"+ selectedValue +"'}",
-        success: function (response) { 
-            var arr = JSON.parse(response)
-            _apiPostResult = JSON.stringify(arr);
-            console.log(_apiPostResult);
-        },
-        error: function (err) {
-            console.log('ERROR');
-        }
-    }); 
-   // $(likeDiv).empty(); 
-   $('#btnLike').toggle();
-  //   $('#divLabel').empty();
-    $(likeDiv).html(_likeItems);
-    $('#divConfirmLikes').toggle();
-    $('#divConfirmLikes').html(" <h2> We're happy you liked our eBoard, now take it for a spin! </h2> <a href='http://eboard.setmore.com/' class='ui button huge green'>Book testdrive 	&nbsp;	&nbsp; <i class='checked calendar icon'></i> </a>");
-    //   cmdCheckLikes();
-});
-
-
-*/
