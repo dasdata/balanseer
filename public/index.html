@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Balanser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="assets/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+
+    <span id="divLabel"></span>
+    <div class="ui segment" style="background-color: silver" id="section-one">
+        <h2 style="text-align: left">Balanser Dashboard</h2>
+
+        <div class="ui top attached tabular menu">
+            <a class="item active" data-tab="first">DAY</a>
+            <a class="item" data-tab="second">WEEK</a>
+            <a class="item" data-tab="third">MONTH</a>
+            <a class="item" data-tab="fourth">YEAR</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="first">
+            <div class="ui two column grid">
+                <div class="column">
+                    <h3 class="header">CONSUMPTION NOW</h3>
+                    <i class="ui icon battery empty massive red"></i>
+                    <h4 class="ui label massive" id="divConsumerNow"></h4>
+                </div>
+                <div class="column">
+                    <h3 class="header">SAVED SO FAR TODAY</h3>
+                    <i class="ui icon battery full massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerBonusNow"></h4>
+                </div>
+            </div>
+
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="second">
+            <div class="ui two column grid">
+                <div class="column">
+                    <h3 class="header">CONSUMPTION LAST WEEK</h3>
+                    <i class="ui icon battery half massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerWeek"></h4>
+                </div>
+                <div class="column">
+                    <h3 class="header">SAVED LAST WEEK</h3>
+                    <i class="ui icon battery full massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerBonusWeek"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="third">
+            <div class="ui two column grid">
+                <div class="column">
+                    <h3 class="header">CONSUMPTION THIS MONTH</h3>
+                    <i class="ui icon battery three quarters massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerMonth"></h4>
+                </div>
+                <div class="column">
+                    <h3 class="header">SAVED THIS MONTH</h3>
+                    <i class="ui icon battery full massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerBonusMonth"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="fourth">
+            <div class="ui two column grid">
+                <div class="column">
+                    <h3 class="header">CONSUMPTION THIS YEAR</h3>
+                    <i class="ui icon battery empty massive red"></i>
+                    <h4 class="ui label massive" id="divConsumerYear"></h4>
+                </div>
+                <div class="column">
+                    <h3 class="header">SAVED THIS YEAR</h3>
+                    <i class="ui icon battery full massive green"></i>
+                    <h4 class="ui label massive" id="divConsumerBonusYear"></h4>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="divHomeDevices"></div>
+    </div>
+
+
+
+    <div class="ui segment section two" id="section-two">
+
+        <div class="ui two column grid">
+            <div class="column">
+
+                <h2>Your profile</h2>
+                <div class="ui card">
+
+                    <div class="content">
+                        <a class="image" href="#">
+                            <img class="ui rounded image big " src="/images/profile/electro.jpg">
+                            <a class="ui left corner label">
+                                <h1>
+                                    <div class="ui label inverted black massive">
+                                        <div id="divConsumerScore"></div>
+                                    </div>
+                                </h1>
+                            </a>
+                        </a>
+                        <a class="ui massive  label" href="#">Electro Guy</a>
+                        <div class="meta">
+                            <h2>
+                                <div id="divHomeDevicesLenght"></div>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <h2>UTILITY CONSUMPTION NEAR BY YOU</h2>
+                <div class="meta">
+                    <div id="map"></div>
+                    <img class="ui image big " src="images/heatmap.png">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="section three ui segment" id="section-three">
+        Built outdoors at Arctic Startup - summer of 2018
+    </div>
+
+    <div class="section seven" id="section-seven" align="center">
+    </div>
+    </div>
+
+    <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/semantic.min.js"></script>
+    <script type="text/javascript" src="assets/js/&#95;main.js"></script>
+
+</body>
+
+</html>

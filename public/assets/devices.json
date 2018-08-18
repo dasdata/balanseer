@@ -1,0 +1,24 @@
+{
+    "eboard": [
+        {
+            "boardName": "Golden",
+            "boardID": "arduino",
+            "color": "brown"
+        },
+        {
+            "boardName": "Silver",
+            "boardID": "arduino-mkr-001",
+            "color": "grey"
+        },
+        {
+            "boardName": "Black n/a",
+            "boardID": "arduino-mkr-002",
+            "color": "black"
+        },
+        {
+            "boardName": "White n/a",
+            "boardID": "arduino-mkr-003",
+            "boardcolor": "silver"
+        }
+    ]
+}

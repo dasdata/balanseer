@@ -1,0 +1,44 @@
+{
+    "devices": [{
+            "deviceName": "TV",
+            "deviceID": "TV1XZU",
+            "deviceDescription": "TV from bedroom",
+            "deviceConsumption": "34kW",
+            "devicePicture": "tv",
+            "deviceStatus": "on"
+        },
+        {
+            "deviceName": "BITCOIN FACTORY",
+            "deviceID": "BITCOIN22",
+            "deviceDescription": "My precious mine",
+            "deviceConsumption": "14MW",
+            "devicePicture": "industry",
+            "deviceStatus": "on"
+        },
+        {
+            "deviceName": "WASHING MACHINE",
+            "deviceID": "MWASH22",
+            "deviceDescription": "Washing machine description",
+            "deviceConsumption": "56TW",
+            "devicePicture": "superpowers",
+            "deviceStatus": "off"
+        },
+        {
+            "deviceName": "HEATING HOUSE",
+            "deviceID": "HEAT221",
+            "deviceDescription": "Floor warming",
+            "deviceConsumption": "12kW",
+            "devicePicture": "fire",
+            "deviceStatus": "on"
+        },
+        {
+            "deviceName": "HOT WATER",
+            "deviceID": "HOT443",
+            "deviceDescription": "Hot water",
+            "deviceConsumption": "56TW",
+            "devicePicture": "bath",
+            "deviceStatus": "on"
+        }
+        
+    ]
+}
