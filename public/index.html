@@ -26,7 +26,7 @@
             <div class="ui two column grid">
                 <div class="column">
                     <h3 class="header">CONSUMPTION NOW</h3>
-                    <i class="ui icon battery empty massive red"></i>
+                    <i class="ui icon battery empty massive red" id="divBatteryNow"></i>
                     <h4 class="ui label massive" id="divConsumerNow"></h4>
                 </div>
                 <div class="column">
@@ -69,7 +69,7 @@
             <div class="ui two column grid">
                 <div class="column">
                     <h3 class="header">CONSUMPTION THIS YEAR</h3>
-                    <i class="ui icon battery empty massive red"></i>
+                    <i class="ui icon battery empty massive green"></i>
                     <h4 class="ui label massive" id="divConsumerYear"></h4>
                 </div>
                 <div class="column">
@@ -82,6 +82,9 @@
 
 
         <div id="divHomeDevices"></div>
+
+        <input id="txtSelectedDevice" type="text">
+    </div>
     </div>
 
 
@@ -128,17 +131,104 @@
 
 
     <div class="section three ui segment" id="section-three">
-        Built outdoors at Arctic Startup - summer of 2018
+        <a href='https://github.com/dasdata/balanseer'>
+            <i class="ui icon big github"></i>
+        </a> Built outdoors at Arctic Startup - summer of 2018
+
     </div>
 
     <div class="section seven" id="section-seven" align="center">
     </div>
     </div>
 
+    <button id="btnBitCoinMine" style="display: none"> Hello</button>
+
     <script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="assets/semantic.min.js"></script>
     <script type="text/javascript" src="assets/js/&#95;main.js"></script>
+    <script>
+        function cmdUpdateConsumption(el) {
+            //  document.querySelector('#'+el.id).checked;
+            var checkSel = document.querySelector('#' + el.id).checked;
+            var consumNow = parseInt(document.getElementById("txtSelectedDevice").value);
+            var consumSelDevice = parseInt(el.value);
 
+            //  document.getElementById("txtSelectedDevice").value = el.value;
+
+            if (!checkSel) {
+                consumNow = consumNow - consumSelDevice;
+                console.log('add comsumption' + consumNow);
+            } else {
+                consumNow = consumNow + consumSelDevice;
+                console.log('remove comsumption' + consumNow);
+            }
+            //  var selectedElement = "on-off-switch"+  what;
+            //  console.log(selectedElement);
+
+            $('#txtSelectedDevice').val(consumNow);
+            ConsumerNow = parseInt($('#txtSelectedDevice').val());
+            cmdReCalculateDevices();
+        }
+
+
+        function cmdReCalculateDevices() {
+            ConsumerNow = parseInt($('#txtSelectedDevice').val());
+            var ConsumerBonusNow = parseInt(ConsumerNow * 0.00025);
+            var ConsumerWeek = ConsumerNow * 7;
+            var ConsumerBonusWeek = ConsumerBonusNow * 7;
+            var ConsumerMonth = ConsumerWeek * 4;
+            var ConsumerBonusMonth = ConsumerBonusWeek * 4;
+            var ConsumerYear = ConsumerMonth * 12;
+            var ConsumerBonusYear = ConsumerBonusMonth * 12;
+            //  var ConsumerScore = ConsumerBonusYear / 100;
+
+            //  alert(ConsumerNow);
+            $('#divConsumerScore').html(ConsumerScore);
+            //  $('#divConsumerNow').html(ConsumerNow + ' kWH');
+            $('#divConsumerBonusNow').html(ConsumerBonusNow + ' units');
+            $('#divConsumerWeek').html(ConsumerWeek + ' kWH');
+            $('#divConsumerBonusWeek').html(ConsumerBonusWeek + ' units');
+            $('#divConsumerMonth').html(ConsumerMonth + ' kWH');
+            $('#divConsumerBonusMonth').html(ConsumerBonusMonth + ' units');
+            $('#divConsumerYear').html(ConsumerYear + ' kWH');
+            $('#divConsumerBonusYear').html(ConsumerBonusYear + ' units');
+            //  $('#consumer').html(cardBoards);
+
+
+
+            setTimeout(function () {
+                //  $("#divBatteryNow").removeClass("empty").addClass("half");
+                //   $('#txtSelectedDevice').val(devTotalConsumption);
+                $('#divConsumerNow').html((parseInt(ConsumerNow)) + ' kWH');
+
+                console.log(ConsumerNow);
+                if (ConsumerNow > 800) {
+                    $("#divBatteryNow").addClass("red"); 
+                    $("#divBatteryWeek").addClass("red"); 
+                    $("#divBatteryMonth").addClass("red"); 
+                    $("#divBatteryYear").addClass("red"); 
+                    $("#divBatteryNow").addClass("full"); 
+                    $("#divBatteryNow").removeClass("green").addClass("red");
+                    $("#divBatteryWeek").removeClass("green").addClass("red");
+                    $("#divBatteryMonth").removeClass("green").addClass("red");
+                    $("#divBatteryYear").removeClass("green").addClass("red");
+                } else {
+                    $("#divBatteryNow").addClass("full"); 
+                    $("#divBatteryNow").removeClass("red").addClass("green");
+                    $("#divBatteryWeek").removeClass("red").addClass("green");
+                    $("#divBatteryMonth").removeClass("red").addClass("green");
+                    $("#divBatteryYear").removeClass("red").addClass("green");
+                  
+
+
+                }
+
+                // make this loop
+                // cmdCalculateDevices();  
+            }, 1000);
+
+        }
+    </script>
 </body>
 
 </html>

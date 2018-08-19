@@ -3,7 +3,8 @@
             "deviceName": "TV",
             "deviceID": "TV1XZU",
             "deviceDescription": "TV from bedroom",
-            "deviceConsumption": "34kW",
+            "deviceConsumption": "84",
+            "deviceUnit": "kWh",
             "devicePicture": "tv",
             "deviceStatus": "on"
         },
@@ -11,7 +12,8 @@
             "deviceName": "BITCOIN FACTORY",
             "deviceID": "BITCOIN22",
             "deviceDescription": "My precious mine",
-            "deviceConsumption": "14MW",
+            "deviceConsumption": "7400",
+            "deviceUnit": "kWh",
             "devicePicture": "industry",
             "deviceStatus": "on"
         },
@@ -19,15 +21,17 @@
             "deviceName": "WASHING MACHINE",
             "deviceID": "MWASH22",
             "deviceDescription": "Washing machine description",
-            "deviceConsumption": "56TW",
+            "deviceConsumption": "56",
+            "deviceUnit": "kWh",
             "devicePicture": "superpowers",
-            "deviceStatus": "off"
+            "deviceStatus": "on"
         },
         {
             "deviceName": "HEATING HOUSE",
             "deviceID": "HEAT221",
             "deviceDescription": "Floor warming",
-            "deviceConsumption": "12kW",
+            "deviceConsumption": "342",
+            "deviceUnit": "kWh",
             "devicePicture": "fire",
             "deviceStatus": "on"
         },
@@ -35,7 +39,8 @@
             "deviceName": "HOT WATER",
             "deviceID": "HOT443",
             "deviceDescription": "Hot water",
-            "deviceConsumption": "56TW",
+            "deviceConsumption": "156",
+            "deviceUnit": "kWh",
             "devicePicture": "bath",
             "deviceStatus": "on"
         }

@@ -1,50 +1,56 @@
 var devicesLocalFile = './../assets/home_devices.json';
-var boardsLocalFile = './../assets/devices.json';
 var boardList = '';
 
-var selectedBoard = 'Golden';
-var selectedDevice = 'arduino';
-
-function cmdSelectBoard(boardID, boardName) {
-    $('#section-three').slideUp();
-    // console.log(boardID);
-    $('#myBoardsList').val(boardID);
-    selectedDevice = boardID;
-    selectedBoard = boardName;
-    $('#divBoard').html(boardName);
-}
-
-$("#myBoardsList").change(function (event) {
-    selectedBoard = $("#myBoardsList option:selected").text();
-    selectedDevice = $(this).val();
-    $('#divBoard').html(selectedBoard);
-});
-
-
-var ConsumerScore = "8.63";
-var ConsumerNow = "44";
-var ConsumerBonusNow = "14";
-var ConsumerWeek = "244";
-var ConsumerBonusWeek = "24";
-var ConsumerMonth = "344";
-var ConsumerBonusMonth = "34";
-var ConsumerYear = "444";
-var ConsumerBonusYear = "54";
-
+// intial total consumption
+var devTotalConsumption = 0;
+var ConsumerScore = 1;
 
 $(document).ready(function () {
     $('.menu .item')
         .tab();
 
     cmdDevicesList();
-    // cmdGetBoardList();
     cmdCalculateDevices();
+    cmdChargeBattery();
 
-    $('#divBoard').html(selectedBoard);
-    $('#myDDL').dropdown({
-        maxSelections: 1
+    //  var consumNow = parseInt(document.getElementById("txtSelectedDevice").value); 
+    ConsumerNow = parseInt($('#txtSelectedDevice').val());
+    setTimeout(function () {
+        console.log(ConsumerNow);
+
+      alert("Your consumption is TOO HIGH in this moment, consider unplug your bitcoin factory!")
+
+    }, 10000);
+
+    function cmdChargeBattery() {
+        var boxes = $('#divBatteryNow');
+        var boxesLength = boxes.length;
+        //  $("#divBatteryNow").removeClass("empty").addClass("half");
+
+        $.each(boxes, function (index, value) {
+         //   $(value).toggleClass('red');
+          //  $("#divBatteryNow").removeClass("empty").addClass("full");
+        });
+
+        setTimeout(function () {
+          //  $("#divBatteryNow").removeClass("empty").addClass("full");
+            cmdChargeBattery();
+        }, 1000);
+    }
+
+    $(".checkDeviceBox").on("click", function (event) {
+        alert(event)
+        //  $('#divBatteryNow').html();
+        //  $("#divBatteryNow").removeClass("red").addClass("green");
+
     });
 
+    $("#btnBitCoinMine").on("click", function (event) {
+        var _apiPostResult = '';
+        $('#divBatteryNow').html();
+        $("#divBatteryNow").removeClass("red").addClass("green");
+
+    });
 
     function cmdPostMe(actionType, boardID, patternID) {
         var apiURL = 'api?=actiontype=' + actionType + '&token=' + boardID + '&pattern=' + patternID;
@@ -63,14 +69,14 @@ $(document).ready(function () {
         });
     }
 
-
-    $("#btnRide").on("click", function (event) {
-        var _apiPostResult = '';
-        $('#divLabel').html();
-        cmdPostMe('ride', selectedDevice, 'riding')
-        $('#divLabel').html(" Ride mode ");
-    });
-
+    /*
+        $("#btnRide").on("click", function (event) {
+            var _apiPostResult = '';
+            $('#divLabel').html();
+            cmdPostMe('ride', selectedDevice, 'riding')
+            $('#divLabel').html(" Ride mode ");
+        });
+    */
 
     $(window).scroll(function () {
         var height = $(window).scrollTop();
@@ -83,6 +89,7 @@ $(document).ready(function () {
         $('.ui.sidebar').sidebar('toggle');
     });
 
+    var devTotalConsumption = 0;
 
     function cmdDevicesList() {
         readTextFile(devicesLocalFile, function (text) {
@@ -93,33 +100,48 @@ $(document).ready(function () {
                 var deviceID = arrayOfObjects.devices[i].deviceID;
                 var deviceDescription = arrayOfObjects.devices[i].deviceDescription;
                 var deviceConsumption = arrayOfObjects.devices[i].deviceConsumption;
+                var deviceUnit = arrayOfObjects.devices[i].deviceUnit;
                 var devicePicture = arrayOfObjects.devices[i].devicePicture;
                 var deviceStatus = arrayOfObjects.devices[i].deviceStatus;
+
                 var deviceOnOff = "off";
                 var switchOnOffCheck = "check";
                 if (deviceStatus == deviceOnOff) {
                     deviceOnOff = "grey big ";
                     switchOnOffCheck = "";
                 } else {
+                    devTotalConsumption += parseInt(deviceConsumption); // get selected values from devices
                     switchOnOffCheck = "checked";
                     deviceOnOff = "green big ";
                 }
-                //   cardBoards += '<div style="cursor:pointer" title="' + deviceName + '" class="card" onclick="cmdSelectBoard(\'' + deviceID + '\',\'' + deviceName + '\')">  <div class="content">  <i class="left '+ devicePicture +' floated icon button ' + deviceOnOff + '"></i>  <div class="header">' + deviceName + '</div>  <div class="description">' + deviceDescription + '</div> </div> </div>';
-                var switchControlOnOff = '<div class="ui bigCheckbox" "> <input style="width:50px;height:53px;" type="checkbox" onclick="alert(\'' + deviceID + '\', \'' + deviceConsumption + '\')" class="ui form right floated "  id="on-off-switch' + deviceID + '" name="switch' + deviceID + '" ' + switchOnOffCheck + '></div>';
-                cardBoards += '<div style="cursor:pointer;" onclick="alert(\'' + deviceID + '\', \'' + deviceConsumption + '\')" class="ui card"><div class="content">' + switchControlOnOff + '<i style="cursor:pointer;margin-right:20px;"  class="left floated ' + devicePicture + ' icon button big ' + deviceOnOff + '"></i><div class="header">' + deviceName +' ('+ deviceConsumption + ')</div><p>' + deviceDescription + '</p></div></div>';
+                //  onclick="cmdUpdateConsumption(\'' + deviceID + '\', \'' + deviceConsumption + '\')"
+
+                var switchControlOnOff = '<div class="ui bigCheckbox" "> <input style="width:50px;height:53px;" type="checkbox"  class="ui form right floated checkDeviceBox" onclick="cmdUpdateConsumption(this)" value="' + deviceConsumption + '" id="on-off-switch' + deviceID + '" name="switch' + deviceID + '" ' + switchOnOffCheck + '></div>';
+                cardBoards += '<div style="cursor:pointer;" class="ui card"><div class="content">' + switchControlOnOff + '<i style="cursor:pointer;margin-right:20px;"  class="left floated ' + devicePicture + ' icon button big ' + deviceOnOff + '"></i><div class="header">' + deviceName + ' (' + deviceConsumption + ' ' + deviceUnit + ')</div><p>' + deviceDescription + '</p></div></div>';
                 //   cardBoards  += deviceName;                
             }
             cardBoards += '</div><br><br>';
             $('#divHomeDevices').html(cardBoards);
+            $('#txtSelectedDevice').val(devTotalConsumption);
             $('#divHomeDevicesLenght').html(' ' + arrayOfObjects.devices.length + ' registred devices');
         });
     }
 
-
     function cmdCalculateDevices() {
+        var ConsumerNow = 1;
+        ConsumerNow = parseInt($('#txtSelectedDevice').val());
+        var ConsumerBonusNow = parseInt(1 / ConsumerNow * 0.00025);
+        var ConsumerWeek = ConsumerNow * 7;
+        var ConsumerBonusWeek = ConsumerBonusNow * 7;
+        var ConsumerMonth = ConsumerWeek * 4;
+        var ConsumerBonusMonth = ConsumerBonusWeek * 4;
+        var ConsumerYear = ConsumerMonth * 12;
+        var ConsumerBonusYear = ConsumerBonusMonth * 12;
+        //  var ConsumerScore = ConsumerBonusYear / 100;
+
         //  alert(ConsumerNow);
         $('#divConsumerScore').html(ConsumerScore);
-        $('#divConsumerNow').html(ConsumerNow + ' kWH');
+        //  $('#divConsumerNow').html(ConsumerNow + ' kWH');
         $('#divConsumerBonusNow').html(ConsumerBonusNow + ' units');
         $('#divConsumerWeek').html(ConsumerWeek + ' kWH');
         $('#divConsumerBonusWeek').html(ConsumerBonusWeek + ' units');
@@ -128,6 +150,18 @@ $(document).ready(function () {
         $('#divConsumerYear').html(ConsumerYear + ' kWH');
         $('#divConsumerBonusYear').html(ConsumerBonusYear + ' units');
         //  $('#consumer').html(cardBoards);
+
+        setTimeout(function () {
+            //  $("#divBatteryNow").removeClass("empty").addClass("half");
+            $('#txtSelectedDevice').val(devTotalConsumption);
+            $('#divConsumerNow').html((parseInt(ConsumerNow)) + ' kWH');
+            // make this loop 
+            if (!ConsumerNow) {
+                cmdCalculateDevices();
+            }
+
+        }, 100);
+
     }
 
 
